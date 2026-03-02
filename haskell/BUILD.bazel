@@ -1,0 +1,28 @@
+package(default_visibility = ["//visibility:public"])
+
+load("@rules_haskell//haskell:cabal.bzl",
+     "haskell_cabal_library",
+     "haskell_cabal_binary")
+
+# Build the Cabal library component from the .cabal file
+haskell_cabal_library(
+    name = "hello-hs",
+    srcs = glob([
+        "hello-hs.cabal",
+        "src/**/*.hs",
+    ]),
+    version = "0.1.0.0",
+    # If your .cabal defines extra deps, list them in 'deps' as other Haskell libs.
+)
+
+# Build the Cabal executable "hello-hs-app" from the same package
+haskell_cabal_binary(
+    name = "hello_hs_app",
+    srcs = glob([
+        "hello-hs.cabal",
+        "src/**/*.hs",
+        "app/**/*.hs",
+    ]),
+    exe_name = "hello-hs-app",  # name from the .cabal executable stanza
+    deps = [":hello-hs"],
+)
