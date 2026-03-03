@@ -102,6 +102,7 @@ py_repositories()
 python_register_toolchains(
     name = "python_3_11",
     python_version = "3.11",  # use a version you want (e.g., 3.10/3.11/3.12)
+    ignore_root_user_error = True,
 )
 
 
